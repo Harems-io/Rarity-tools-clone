@@ -4,13 +4,15 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>Harems Tools</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex flex-col items-center justify-center">
       	<div className="p-4 pb-20 overflow-x-auto">
-      		<div>
+
+          {/* top ad */}
+          <div>
       			<div className="hidden lg:block" style={{width: "728px", margin: "auto"}}>
       				<a href="https://etheremura.io/?utm_source=website&amp;utm_medium=banner&amp;utm_campaign=rarity&amp;utm_content=topbanner1" target="_blank"><img src="https://ewr1.vultrobjects.com/current/etheremura2_horiz_d" className="w-full h-auto" /></a>
       			</div>
@@ -19,17 +21,33 @@ export default function Home() {
       			</div>
       			<div className="mt-0.5 text-sm text-center textColor600">Please visit our sponsors!</div>
       		</div>
+
+          {/* container for main content */}
       		<div className="mt-6 mb-10">
       			<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Newest Collections Added</h2>
+
+            {/* wrapper around group of cards to center them */ }
       			<div className="flex flex-row justify-center m-auto" style={{maxWidth: ""}}>
+
+              {/* group of all collection cards */}
       				<div className="flex flex-row flex-wrap justify-around">
-      					<div className="flex flex-row flex-wrap justify-center">
-      						<div className="flex flex-row flex-wrap justify-center">
-      							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
+
+                {/* group of 4 cards - fits on wide screens */}
+                <div className="flex flex-row flex-wrap justify-center">
+
+                  {/* group of 2 cards - fits on med screens */}
+                  <div className="flex flex-row flex-wrap justify-center">
+
+                    {/* card component - fits on small screens/phones */}
+                    <div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       								<div className="w-72">
       									<a href="/svinsfarm" className="">
-      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
-      											<div className="absolute w-full font-bold text-center text-white bg-pink-700">Featured</div> <img src="https://projects.rarity.tools/static/images/headers/svinsfarm/header.jpg" className="object-cover object-center w-full h-full" /> </div>
+                          <div className="relative w-full overflow-hidden" style={{height: "220px"}}>
+
+                            {/* unique featured banner for first element */}
+      											<div className="absolute w-full font-bold text-center text-white bg-pink-700">Featured</div>
+                            <img src="https://projects.rarity.tools/static/images/headers/svinsfarm/header.jpg" className="object-cover object-center w-full h-full" />
+                          </div>
       										<div className="flex flex-row mt-2">
       											<div className="p-2 ml-2">
       												<div className="font-bold text-pink-600 dark:text-gray-300">SVINS</div>
@@ -50,7 +68,9 @@ export default function Home() {
       							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       								<div className="w-72">
       									<a href="/long-neckie-ladies" className="">
-      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}> <img src="https://lh3.googleusercontent.com/QLSVo3VbidUSWlWmBw9uByy7mlJfptj07LcE9VBeE9ITnuyvV4l_4Pai0BFuhHwmNF-GuPHQddvRPGpmUBFipkNmTFZoq9IJirG82S0=s2500" className="object-cover object-center w-full h-full" /> </div>
+      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
+                            <img src="https://lh3.googleusercontent.com/QLSVo3VbidUSWlWmBw9uByy7mlJfptj07LcE9VBeE9ITnuyvV4l_4Pai0BFuhHwmNF-GuPHQddvRPGpmUBFipkNmTFZoq9IJirG82S0=s2500" className="object-cover object-center w-full h-full" />
+                          </div>
       										<div className="flex flex-row mt-2">
       											<div className="p-2 ml-2">
       												<div className="font-bold text-pink-600 dark:text-gray-300">Long Neckie Ladies</div>
@@ -68,6 +88,7 @@ export default function Home() {
       								</div>
       							</div>
       						</div>
+                  {/* not sure if we need this ad in b/w */ }
       						<div className="block w-full mb-4 lg:hidden">
       							<div className="w-full m-auto my-2" style={{width: "300px"}}>
       								<a target="_blank"><img src="https://ewr1.vultrobjects.com/current/mixedfam2_vert_m" className="w-full h-auto" /></a>
@@ -78,7 +99,9 @@ export default function Home() {
       							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       								<div className="w-72">
       									<a href="/crazy-lizard-army" className="">
-      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}> <img src="https://lh3.googleusercontent.com/cpmhZkIc9dpFXCeOxaOpXBJ7YaMIDVjUPm48LAs1Lz57DzapGVzYUIm35aTTdFCk2LpB2uYk62WlimAIX_WE3IY1LHnczB66JTLLPQ=s2500" className="object-cover object-center w-full h-full" /> </div>
+      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
+                            <img src="https://lh3.googleusercontent.com/cpmhZkIc9dpFXCeOxaOpXBJ7YaMIDVjUPm48LAs1Lz57DzapGVzYUIm35aTTdFCk2LpB2uYk62WlimAIX_WE3IY1LHnczB66JTLLPQ=s2500" className="object-cover object-center w-full h-full" />
+                          </div>
       										<div className="flex flex-row mt-2">
       											<div className="p-2 ml-2">
       												<div className="font-bold text-pink-600 dark:text-gray-300"> Crazy Lizard Armyl, /. </div>
@@ -99,7 +122,9 @@ export default function Home() {
       							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       								<div className="w-72">
       									<a href="/pudgypenguins" className="">
-      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}> <img src="https://lh3.googleusercontent.com/y2HMjE2tc2dNZVP1EuDOE3IReS2plYMUm3yq2-jVp9_9L9D3H1IVHFbmalmXCoG2KYfy_R7LYK8c4Q8QPuzv41FmppRWLpyW02ii=s2500" className="object-cover object-center w-full h-full" /> </div>
+      										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
+                            <img src="https://lh3.googleusercontent.com/y2HMjE2tc2dNZVP1EuDOE3IReS2plYMUm3yq2-jVp9_9L9D3H1IVHFbmalmXCoG2KYfy_R7LYK8c4Q8QPuzv41FmppRWLpyW02ii=s2500" className="object-cover object-center w-full h-full" />
+                          </div>
       										<div className="flex flex-row mt-2">
       											<div className="p-2 ml-2">
       												<div className="font-bold text-pink-600 dark:text-gray-300"> Pudgy Penguins </div>
@@ -120,6 +145,14 @@ export default function Home() {
       						</div>
       					</div>
       				</div>
+              {/* right ad */}
+              <div className="hidden lg:block">
+              	<div className="ml-2">
+              		<div className="hidden lg:block" style={{width: "120px"}}>
+              			<a target="_blank"><img src="https://ewr1.vultrobjects.com/current/mixedfam2_vert_d" className="w-full h-auto"/></a>
+              		</div>
+              	</div>
+              </div>
       			</div>
       		</div>
       	</div>
