@@ -1,0 +1,151 @@
+table.dataTable th, td {
+	margin: 0px;
+	padding-top: 0.625rem;
+	padding-bottom: 0.625rem;
+	padding-left: 0.5rem;
+	padding-right: 0.75rem;
+}
+
+.dark table.dataTable th, .dark td {
+	--tw-text-opacity: 1;
+	color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+table.dataTable th, td {
+	transition-property: background-color, border-color, color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+table.dataTable th {
+	--tw-bg-opacity: 1;
+	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+
+.dark table.dataTable th {
+	--tw-bg-opacity: 1;
+	background-color: rgba(50, 53, 72, var(--tw-bg-opacity));
+}
+
+table.dataTable th {
+	cursor: pointer;
+	position: sticky;
+	top: -1rem;
+	--tw-text-opacity: 1;
+	color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+.dark table.dataTable th {
+	--tw-text-opacity: 1;
+	color: rgba(209, 213, 219, var(--tw-text-opacity));
+}
+
+table.dataTable th {
+	white-space: nowrap;
+	transition-property: background-color, border-color, color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+table.dataTable tr {
+	--tw-border-opacity: 1;
+	border-color: rgba(251, 207, 232, var(--tw-border-opacity));
+}
+
+.dark table.dataTable tr {
+	--tw-border-opacity: 1;
+	border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+}
+
+table.dataTable tr {
+	border-bottom-width: 1px;
+	transition-property: background-color, border-color, color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+@media only screen and (max-width:1280px) {
+	.tableHolder {
+		overflow-x: auto;
+	}
+}
+
+// traitValues
+
+.dark table.traitValues{
+  --tw-border-opacity:1;
+  border-color:rgba(107, 114, 128, var(--tw-border-opacity))
+}
+table.traitValues{
+  border-top-width:1px
+}
+table.traitValues th, td{
+  padding-right:1.5rem
+}
+table.traitValues th{
+  --tw-bg-opacity:1;
+  background-color:rgba(255, 255, 255, var(--tw-bg-opacity))
+}
+.dark table.traitValues th{
+  --tw-bg-opacity:1;
+  background-color:rgba(31, 41, 55, var(--tw-bg-opacity))
+}
+table.traitValues th{
+  font-weight:400;
+  font-size:1rem;
+  line-height:1.5rem;
+  padding-top:0.5rem;
+  padding-bottom:0.5rem;
+  position:sticky;
+  top:0px;
+  --tw-text-opacity:1;
+  color:rgba(190, 24, 93, var(--tw-text-opacity))
+}
+.dark table.traitValues th{
+  --tw-text-opacity:1;
+  color:rgba(209, 213, 219, var(--tw-text-opacity))
+}
+table.traitValues th{
+  z-index:10
+}
+.dark table.traitValues tr{
+  --tw-border-opacity:1;
+  border-color:rgba(107, 114, 128, var(--tw-border-opacity))
+}
+table.traitValues tr{
+  border-bottom-width:1px
+}
+
+// upcoming
+
+.dataTable tr.featuredUpcoming{
+  --tw-bg-opacity:1;
+  background-color:rgba(253, 242, 248, var(--tw-bg-opacity));
+  --tw-border-opacity:1;
+  border-color:rgba(190, 24, 93, var(--tw-border-opacity));
+  border-radius:0.5rem;
+  border-width:2px;
+  --tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.dataTable tr.featuredUpcoming td{
+  --tw-text-opacity:1;
+  color:rgba(24, 31, 38, var(--tw-text-opacity))
+}
+.dark .dataTable tr.featuredUpcoming{
+  --tw-bg-opacity:1;
+  background-color:rgba(31, 41, 55, var(--tw-bg-opacity));
+  --tw-border-opacity:1;
+  border-color:rgba(190, 24, 93, var(--tw-border-opacity));
+  border-radius:0.5rem;
+  border-width:2px;
+  --tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.dark .dataTable tr.featuredUpcoming td{
+  --tw-text-opacity:1;
+  color:rgba(209, 213, 219, var(--tw-text-opacity))
+}
+.collections-dropdown:hover{
+  display:block
+}
