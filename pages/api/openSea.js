@@ -154,6 +154,68 @@ export default function openSeaAPI(req, res) {
           name: "The Wicked Craniums",
           amount: "529.44"
         },
+      ],
+      allCollections: [
+        {
+          href: "/cryptopunks",
+          imgSrc: "https://lh3.googleusercontent.com/BdxvLseXcfl57BiuQcQYdJ64v-aI8din7WPk0Pgo3qQFhAUH-B6i-dCqqc_mCkRIzULmwzwecnohLhrcH8A9mpWIZqA7ygc52Sr81hE=s120",
+          name: "CryptoPunks",
+          vol7day: "25,443.71 ETH",
+          sales7d: "653",
+          avgPrice7d: "38.96 ETH",
+          totalSupply: "9,999",
+          owners: "2,644",
+          ownersPct: "26.44%",
+          estMarketCap: "389,604.33 ETH",
+          volAllTime: "228,876.90 ETH",
+          salesAllTime: "13,818",
+          addedDate:"2021/04/30"
+        },
+        {
+          href: "/vogu",
+          imgSrc: "https://lh3.googleusercontent.com/4kPtQ8iep2Sw8MEV8TLfGuDsX0ql5pfniHZZGpwx3jp9D2ZRCE0coFxagGrhFH0sfVUezN1O-aRy9SZDong-N0RNsHgCg2rvX7LSJw=s120",
+          name: "The Vogu Collective",
+          vol7day: "3,232.51 ETH",
+          sales7d: "5,641",
+          avgPrice7d: "0.57 ETH",
+          totalSupply: "7,777",
+          owners: "2,116",
+          ownersPct: "27.21%",
+          estMarketCap: "4,456.53 ETH",
+          volAllTime: "3,232.51 ETH",
+          salesAllTime: "5,641",
+          addedDate:"2021/07/28"
+        },
+        {
+          href: "/vogu",
+          imgSrc: "https://lh3.googleusercontent.com/4kPtQ8iep2Sw8MEV8TLfGuDsX0ql5pfniHZZGpwx3jp9D2ZRCE0coFxagGrhFH0sfVUezN1O-aRy9SZDong-N0RNsHgCg2rvX7LSJw=s120",
+          name: "The Vogu Collective",
+          vol7day: "3,232.51 ETH",
+          sales7d: "5,641",
+          avgPrice7d: "0.57 ETH",
+          totalSupply: "7,777",
+          owners: "2,116",
+          ownersPct: "27.21%",
+          estMarketCap: "4,456.53 ETH",
+          volAllTime: "3,232.51 ETH",
+          salesAllTime: "5,641",
+          addedDate:"2021/07/28"
+        },
+        {
+          href: "/vogu",
+          imgSrc: "https://lh3.googleusercontent.com/4kPtQ8iep2Sw8MEV8TLfGuDsX0ql5pfniHZZGpwx3jp9D2ZRCE0coFxagGrhFH0sfVUezN1O-aRy9SZDong-N0RNsHgCg2rvX7LSJw=s120",
+          name: "The Vogu Collective",
+          vol7day: "3,232.51 ETH",
+          sales7d: "5,641",
+          avgPrice7d: "0.57 ETH",
+          totalSupply: "7,777",
+          owners: "2,116",
+          ownersPct: "27.21%",
+          estMarketCap: "4,456.53 ETH",
+          volAllTime: "3,232.51 ETH",
+          salesAllTime: "5,641",
+          addedDate:"2021/07/28"
+        }
       ]
     }
   )
