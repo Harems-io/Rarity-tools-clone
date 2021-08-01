@@ -4,6 +4,7 @@ import absoluteUrl from "next-absolute-url"
 
 import AllCollectionsTable from "../components/all-collections-table"
 import CollectionGroup from "../components/collection-group"
+import Layout from "../components/layout"
 import RightAd from "../components/right-ad"
 import TopAd from "../components/top-ad"
 import TopListCard from "../components/top-list-card"
@@ -24,13 +25,7 @@ export async function getServerSideProps(context) {
 
 export default function Home(props) {
   return (
-    <div className="relative flex flex-col h-full overflow-hidden lg:h-screen">
-      <Head>
-        <title>Harems Tools</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    	<main className="p-4 pb-20 overflow-x-auto">
-
+    <Layout title="Harems Tools">
         <TopAd href="https://etheremura.io/" imgSrc="https://ewr1.vultrobjects.com/current/etheremura2_horiz_d" />
 
         {/* container for first section of content */}
@@ -103,19 +98,6 @@ export default function Home(props) {
         		</div>
         	</div>
         </div>
-    	</main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2"   />
-        </a>
-      </footer>
-    </div>
+    </Layout>
   )
 }
