@@ -45,7 +45,7 @@ export default function Home(props) {
 
                   if (dataForGroup.length) {
                     return(
-                      <CollectionGroup data={dataForGroup} insertAd={insertAd} />
+                      <CollectionGroup data={dataForGroup} insertAd={insertAd} key={`colGrp${i}`} />
                     )
                   }
                 })

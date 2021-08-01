@@ -16,7 +16,7 @@ export default function Layout ({ title, children }) {
         {children}
       </div>
 
-      <footer>
+      <footer className="flex justify-center">
         <a
           href="https://github.com/nresh"
           target="_blank"

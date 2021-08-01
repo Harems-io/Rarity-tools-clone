@@ -28,7 +28,7 @@ export default function AllCollectionsTable ({ data }) {
           Added </th>
       </tr>
       {
-        data.map( (item, i) => { return( <AllCollectionsItem number={i+1} data={item} /> ) })
+        data.map( (item, i) => { return( <AllCollectionsItem number={i+1} data={item} key={`allCollectionsTable-${i}`} /> ) })
       }
     </table>
   )

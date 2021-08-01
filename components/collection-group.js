@@ -6,10 +6,10 @@ const CARDS_PER_ROW = 2
 export default function CollectionGroup ({ data, insertAd }) {
   const row = (i) => {
     return(
-      <div className="flex flex-row flex-wrap justify-center">
+      <div className="flex flex-row flex-wrap justify-center" key={`colSubGrp${i}`}>
         {
           data.slice(i * CARDS_PER_ROW, (i+1) * CARDS_PER_ROW).map((card) => {
-            return <CollectionCard data={card} />
+            return <CollectionCard data={card} key={`colCard${card.name}`} />
           })
         }
       </div>
