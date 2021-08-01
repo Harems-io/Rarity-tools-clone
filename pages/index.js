@@ -1,7 +1,24 @@
 import Head from 'next/head'
+
+import absoluteUrl from "next-absolute-url"
+
+import CollectionCard from "../components/collection-card"
+import MidAd from "../components/mid-ad"
+import RightAd from "../components/right-ad"
+import TopAd from "../components/top-ad"
+
 // import '../styles/index.module.scss';
 
-export default function Home() {
+const fetcher = url => fetch(url).then(res => res.json());
+
+export async function getServerSideProps(context) {
+  const { origin } = absoluteUrl(context.req)
+  const apiURL = `${origin}/api/openSea`
+  const data = await fetcher(apiURL)
+  return { props: data}
+}
+
+export default function Home(props) {
   return (
     <div className="relative flex flex-col h-full overflow-hidden lg:h-screen">
       <Head>
@@ -10,16 +27,7 @@ export default function Home() {
       </Head>
     	<main className="p-4 pb-20 overflow-x-auto">
 
-        {/* top ad */}
-        <div>
-    			<div className="hidden lg:block" style={{width: "728px", margin: "auto"}}>
-    				<a href="https://etheremura.io/?utm_source=website&amp;utm_medium=banner&amp;utm_campaign=rarity&amp;utm_content=topbanner1" target="_blank"><img src="https://ewr1.vultrobjects.com/current/etheremura2_horiz_d" className="w-full h-auto"   /></a>
-    			</div>
-    			<div className="block lg:hidden" style={{width: "300px", margin: "auto"}}>
-    				<a href="https://etheremura.io/?utm_source=website&amp;utm_medium=banner&amp;utm_campaign=rarity&amp;utm_content=topbanner1" target="_blank"><img src="https://ewr1.vultrobjects.com/current/etheremura2_horiz_m" className="w-full h-auto"   /> </a>
-    			</div>
-    			<div className="mt-0.5 text-sm text-center textColor600">Please visit our sponsors!</div>
-    		</div>
+        <TopAd href="https://etheremura.io/" imgSrc="https://ewr1.vultrobjects.com/current/etheremura2_horiz_d" />
 
         {/* container for first section of content */}
     		<div className="mt-6 mb-10">
@@ -37,121 +45,21 @@ export default function Home() {
                 {/* group of 2 cards - fits on med screens */}
                 <div className="flex flex-row flex-wrap justify-center">
 
-                  {/* card component - fits on small screens/phones */}
-                  <div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
-    								<div className="w-72">
-    									<a href="/svinsfarm" className="">
-                        <div className="relative w-full overflow-hidden" style={{height: "220px"}}>
+                  {/* eventually loop thru these */}
+                  <CollectionCard data={props.collections[0]} />
+                  <CollectionCard data={props.collections[1]} />
+    						</div>
 
-                          {/* unique featured banner for first element */}
-    											<div className="absolute w-full font-bold text-center text-white bg-pink-700">Featured</div>
-                          <img src="https://projects.rarity.tools/static/images/headers/svinsfarm/header.jpg" className="object-cover object-center w-full h-full"   />
-                        </div>
-    										<div className="flex flex-row mt-2">
-    											<div className="p-2 ml-2">
-    												<div className="font-bold text-pink-600 dark:text-gray-300">SVINS</div>
-    												<div className="text-sm text-gray-400">Added 13 Jul 2021</div>
-    												<div className="text-sm text-gray-400">Owners: 213</div>
-    												<div className="text-sm text-gray-400">Total Volume: 74.23 ETH</div>
-    											</div>
-    											<div className="flex-grow"></div>
-    											<div className="mt-3 mr-3" style={{maxWidth: "3rem"}}> <img src="https://lh3.googleusercontent.com/BEsmio4587tvd8RE12v6HDUy9jSSGMPoKRx_PO3tdK-7sigUg-86OcQxfJEWZyJVV2sfWN2rhgDVPQ-T6Vs-GfpHh0V0ulvun1Yb=s120" className="w-16 h-auto rounded-full"   /> </div>
-    										</div>
-    										<div className="p-4 pt-2 text-sm notes dark:text-gray-300">
-    											<p> <strong>SVINS</strong> – is the Largest <strong>NON-PROCEDURAL</strong> 😮 3D Diverse Collection of 1000 unique Limited Edition NFTs collectibles living on the Ethereum blockchain ever created, minted and attributed one by one by a single person without the help of Ai. </p>
-    											<p>Each SVIN i...</p>
-    										</div>
-    									</a>
-    								</div>
-    							</div>
-    							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
-    								<div className="w-72">
-    									<a href="/long-neckie-ladies" className="">
-    										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
-                          <img src="https://lh3.googleusercontent.com/QLSVo3VbidUSWlWmBw9uByy7mlJfptj07LcE9VBeE9ITnuyvV4l_4Pai0BFuhHwmNF-GuPHQddvRPGpmUBFipkNmTFZoq9IJirG82S0=s2500" className="object-cover object-center w-full h-full"   />
-                        </div>
-    										<div className="flex flex-row mt-2">
-    											<div className="p-2 ml-2">
-    												<div className="font-bold text-pink-600 dark:text-gray-300">Long Neckie Ladies</div>
-    												<div className="text-sm text-gray-400">Added 30 Jul 2021</div>
-    												<div className="text-sm text-gray-400">Owners: 908</div>
-    												<div className="text-sm text-gray-400">Total Volume: 36.07 ETH</div>
-    											</div>
-    											<div className="flex-grow"></div>
-    											<div className="mt-3 mr-3" style={{maxWidth: "3rem"}}><img src="https://lh3.googleusercontent.com/eV3XbDmvPumzQMiWECbJK8P0LY3YlRYM6k4Xn5QmYMRy0yRxi5hsLJcFNxAp4JxpjpzRIwxpDdi83CdUa0nWl4BdtZTarelmG5Vu=s120" className="w-16 h-auto rounded-full"   /></div>
-    										</div>
-    										<div className="p-4 pt-2 text-sm notes dark:text-gray-300">
-    											<p>Long Neckie Ladies are a fine art, hand drawn, computer generated collectible of 3333 diverse females created by 12-year-old digital artist Nyla Hayes. Each Long Neckie features an elongated neck that is inspired by Nyla’s favorite dinosaur, the bron...</p>
-    										</div>
-    									</a>
-    								</div>
-    							</div>
-    						</div>
-                {/* not sure if we need this ad in b/w */ }
-    						<div className="block w-full mb-4 lg:hidden">
-    							<div className="w-full m-auto my-2" style={{width: "300px"}}>
-    								<a target="_blank"><img src="https://ewr1.vultrobjects.com/current/mixedfam2_vert_m" className="w-full h-auto"   /></a>
-    								<div className="text-xs text-center">Please visit our sponsors!</div>
-    							</div>
-    						</div>
+                <MidAd href="https://osirismetaverse.com/cosmic" imgSrc="https://ewr1.vultrobjects.com/current/cosmickids_vert_m" />
+
     						<div className="flex flex-row flex-wrap justify-center">
-    							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
-    								<div className="w-72">
-    									<a href="/crazy-lizard-army" className="">
-    										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
-                          <img src="https://lh3.googleusercontent.com/cpmhZkIc9dpFXCeOxaOpXBJ7YaMIDVjUPm48LAs1Lz57DzapGVzYUIm35aTTdFCk2LpB2uYk62WlimAIX_WE3IY1LHnczB66JTLLPQ=s2500" className="object-cover object-center w-full h-full"   />
-                        </div>
-    										<div className="flex flex-row mt-2">
-    											<div className="p-2 ml-2">
-    												<div className="font-bold text-pink-600 dark:text-gray-300"> Crazy Lizard Armyl, /. </div>
-    												<div className="text-sm text-gray-400">Added 30 Jul 2021</div>
-    												<div className="text-sm text-gray-400">Owners: 1395</div>
-    												<div className="text-sm text-gray-400">Total Volume: 109.9 ETH</div>
-    											</div>
-    											<div className="flex-grow"></div>
-    											<div className="mt-3 mr-3" style={{maxWidth: "3rem"}}><img src="https://lh3.googleusercontent.com/Qg1YzUN_XOtHrX_MnilRbm29CTA-oNscS9dkVbSGKrzoxHImq5lOrON7H-COBqekKo7ZDENj-8y2Gp7bXxJkhEwid_XiI-9LgTDBzg=s120" className="w-16 h-auto rounded-full"   /></div>
-    										</div>
-    										<div className="p-4 pt-2 text-sm notes dark:text-gray-300">
-    											<p>The Crazy Lizard Army is made up of 10000 unique lizards. Become soldier in our army when you hold a lizard. In our army, there are all sorts of Lizards, some are good, some are evil, and some are CRAZY! Who knows which you will meet?
-    												<br /> Did you know yo...</p>
-    										</div>
-    									</a>
-    								</div>
-    							</div>
-    							<div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
-    								<div className="w-72">
-    									<a href="/pudgypenguins" className="">
-    										<div className="relative w-full overflow-hidden" style={{height: "220px"}}>
-                          <img src="https://lh3.googleusercontent.com/y2HMjE2tc2dNZVP1EuDOE3IReS2plYMUm3yq2-jVp9_9L9D3H1IVHFbmalmXCoG2KYfy_R7LYK8c4Q8QPuzv41FmppRWLpyW02ii=s2500" className="object-cover object-center w-full h-full"   />
-                        </div>
-    										<div className="flex flex-row mt-2">
-    											<div className="p-2 ml-2">
-    												<div className="font-bold text-pink-600 dark:text-gray-300"> Pudgy Penguins </div>
-    												<div className="text-sm text-gray-400">Added 29 Jul 2021</div>
-    												<div className="text-sm text-gray-400">Owners: 1824</div>
-    												<div className="text-sm text-gray-400">Total Volume: 177.83 ETH</div>
-    											</div>
-    											<div className="flex-grow"></div>
-    											<div className="mt-3 mr-3" style={{maxWidth: "3rem"}}><img src="https://lh3.googleusercontent.com/bcCd1TfusKK6wWjmshwmizmY9j7An3pp9kxopMxfIt-_I8WFnSIK-5gevOduoYK4Qpq2e3DyXgROKNfkP396W5ViEYXhxoyAZG3s_vY=s120" className="w-16 h-auto rounded-full"   /></div>
-    										</div>
-    										<div className="p-4 pt-2 text-sm notes dark:text-gray-300">
-    											<p>Located in the freezing cold, arctic region of the metaverse you can find 8,888 cute chubby Pudgy Penguins sliding around on the ETH blockchain.</p>
-    											<p>Come join the huddle today at <a href="https://pudgypenguins.io">pudgypenguins.io</a></p>
-    										</div>
-    									</a>
-    								</div>
-    							</div>
+                  <CollectionCard data={props.collections[2]} />
+                  <CollectionCard data={props.collections[3]} />
     						</div>
     					</div>
     				</div>
             {/* right ad */}
-            <div className="hidden lg:block">
-            	<div className="ml-2">
-            		<div className="hidden lg:block" style={{width: "120px"}}>
-            			<a target="_blank"><img src="https://ewr1.vultrobjects.com/current/mixedfam2_vert_d" className="w-full h-auto"  /></a>
-            		</div>
-            	</div>
-            </div>
+            <RightAd href="https://osirismetaverse.com/cosmic" imgSrc="https://ewr1.vultrobjects.com/current/cosmickids_vert_d" />
     			</div>
     		</div>
 
@@ -159,9 +67,7 @@ export default function Home() {
         	<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Top Collections</h2>
         	<div className="flex flex-row flex-wrap justify-center">
         		<div className="pt-4 pb-3 mt-4 border border-gray-300 rounded-lg shadow-md dark:border-gray-800 bgCard ml-4">
-        			<h2 className="px-4 mb-3 text-lg font-extrabold text-pink-600">
-        		By 7 Day Volume
-        	</h2>
+        			<h2 className="px-4 mb-3 text-lg font-extrabold text-pink-600">By 7 Day Volume</h2>
         			<div>
         				<a href="/cryptopunks" className="">
         					<div className="flex flex-row items-center px-4 py-2 space-x-3 cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -266,9 +172,7 @@ export default function Home() {
         			</div>
         		</div>
         		<div className="pt-4 pb-3 mt-4 border border-gray-300 rounded-lg shadow-md dark:border-gray-800 bgCard ml-4">
-        			<h2 className="px-4 mb-3 text-lg font-extrabold text-pink-600">
-        		By Total Volume
-        	</h2>
+        			<h2 className="px-4 mb-3 text-lg font-extrabold text-pink-600">By Total Volume</h2>
         			<div>
         				<a href="/cryptopunks" className="">
         					<div className="flex flex-row items-center px-4 py-2 space-x-3 cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -612,7 +516,7 @@ export default function Home() {
               			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
               		</svg>
               	</div>
-              	<input spellcheck="false" placeholder="Search by Project Name ..." className="block w-full pl-1 ml-1 text-base text-gray-700 placeholder-pink-400 outline-none  bg-none lg:ml-0 search bgInput textInput" />
+              	<input spellCheck="false" placeholder="Search by Project Name ..." className="block w-full pl-1 ml-1 text-base text-gray-700 placeholder-pink-400 outline-none  bg-none lg:ml-0 search bgInput textInput" />
               </div>
         			<table className="relative m-auto dataTable">
         				<tr className="text-right">
