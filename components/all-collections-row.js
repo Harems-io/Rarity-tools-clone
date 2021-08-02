@@ -1,4 +1,4 @@
-export default function AllCollectionsItem ({ number, data }) {
+export default function AllCollectionsItem ({ number, data, currency }) {
   return (
     <tr className="text-right text-gray-800">
       <td>{number}</td>
@@ -10,14 +10,14 @@ export default function AllCollectionsItem ({ number, data }) {
           </div>
         </a>
       </td>
-      <td>{data.vol7day}</td>
-      <td>{data.sales7d}</td>
-      <td>{data.avgPrice7d}</td>
+      <td>{data.vol7day} {currency}</td>
+      <td>{data.sales7day}</td>
+      <td>{data.avgPrice7day} {currency}</td>
       <td>{data.totalSupply}</td>
       <td>{data.owners}</td>
       <td>{data.ownersPct}</td>
-      <td>{data.estMarketCap}</td>
-      <td>{data.volAllTime}</td>
+      <td>{data.estMarketCap} {currency}</td>
+      <td>{data.volAllTime} {currency}</td>
       <td>{data.salesAllTime}</td>
       <td>{data.addedDate}</td>
     </tr>

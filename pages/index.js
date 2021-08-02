@@ -34,6 +34,7 @@ export default function Home(props) {
   const [searchTerm, setSearchTerm] = useState("")
   const [allCollections, setAllCollections] = useState(props.allCollections)
 
+
   function editSearchTerm(e) {
     setSearchTerm(e.target.value)
   }
@@ -103,7 +104,7 @@ export default function Home(props) {
           						" style={{maxWidth: "50%"}}>
               	<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               </div>
-              <AllCollectionsTable data={searchByName()} />
+              <AllCollectionsTable data={searchByName()} currency={"ETH"} />
         			<div className="mt-4 text-sm text-gray-400"> * All data from OpenSea
         				<br /> ** Est. Market Cap calculated by using 7 day average price * total supply
         				<br />
