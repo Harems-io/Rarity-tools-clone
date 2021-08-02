@@ -16,6 +16,7 @@ export default function Layout ({ title, collectionsList, newList, children }) {
         {children}
       </div>
 
+      {/*
       <footer className="flex justify-center">
         <a
           href="https://github.com/nresh"
@@ -25,6 +26,7 @@ export default function Layout ({ title, collectionsList, newList, children }) {
           Built by N R
         </a>
       </footer>
+      */}
     </div>
   )
 }
