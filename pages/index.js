@@ -1,13 +1,20 @@
+// react
+import {useState} from 'react'
+
+// next
 import Head from 'next/head'
 
+// external
 import absoluteUrl from "next-absolute-url"
 
+// components
 import AllCollectionsTable from "../components/all-collections-table"
 import CollectionGroup from "../components/collection-group"
 import Layout from "../components/layout"
 import RightAd from "../components/right-ad"
 import TopAd from "../components/top-ad"
 import TopListCard from "../components/top-list-card"
+import SearchBar from "../components/search-bar"
 
 const COLLECTIONS_PER_ROW = 4
 const COLLECTION_TOTAL_NUM = 12
@@ -24,8 +31,19 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home(props) {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [allCollections, setAllCollections] = useState(props.allCollections)
+
+  function editSearchTerm(e) {
+    setSearchTerm(e.target.value)
+  }
+
+  function searchByName() {
+    return allCollections.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  }
+
   return (
-    <Layout title="Harems Tools">
+    <Layout title="Harems Tools" collectionsList={props.allCollections} newList={props.newCollections}>
         <TopAd href="https://etheremura.io/" imgSrc="https://ewr1.vultrobjects.com/current/etheremura2_horiz_d" />
 
         {/* container for first section of content */}
@@ -83,14 +101,9 @@ export default function Home(props) {
           							bgInput
           							textInput
           						" style={{maxWidth: "50%"}}>
-              	<div className="ml-2 text-gray-400">
-              		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-search">
-              			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              		</svg>
-              	</div>
-              	<input spellCheck="false" placeholder="Search by Project Name ..." className="block w-full pl-1 ml-1 text-base text-gray-700 placeholder-pink-400 outline-none  bg-none lg:ml-0 search bgInput textInput" />
+              	<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               </div>
-              <AllCollectionsTable data={props.allCollections} />
+              <AllCollectionsTable data={searchByName()} />
         			<div className="mt-4 text-sm text-gray-400"> * All data from OpenSea
         				<br /> ** Est. Market Cap calculated by using 7 day average price * total supply
         				<br />

@@ -216,6 +216,33 @@ export default function openSeaAPI(req, res) {
           salesAllTime: "5,641",
           addedDate:"2021/07/28"
         }
+      ],
+      newCollections: [
+        {
+          href: "/ruumz",
+          imgSrc: "https://lh3.googleusercontent.com/CUQJJatR5l3WEhqDwd88-tfi-tlzgMyMYbXdAtt5YLaq808VG5mwI5Fli5-bZ3U7KZgiTqVGOhwFhybPe5nHa1JS2hW3qhI8736s=s120",
+          name: "RUUMZ"
+        },
+        {
+          href: "/spookies-nft",
+          imgSrc: "https://lh3.googleusercontent.com/AZPmZ_3B4vjbbdSx2K2P4eQBCfj60ApxDjM97otHdgLeNZTPvdGvpSfOa8oKD9E_eRlz-RSiJ-83Lj9sIIKKNaTuArPq_ITFBqJ0hw=s120",
+          name: "Spookies NFT"
+        },
+        {
+          href: "/long-neckie-ladies",
+          imgSrc: "https://lh3.googleusercontent.com/eV3XbDmvPumzQMiWECbJK8P0LY3YlRYM6k4Xn5QmYMRy0yRxi5hsLJcFNxAp4JxpjpzRIwxpDdi83CdUa0nWl4BdtZTarelmG5Vu=s120",
+          name: "Long Neckie Ladies"
+        },
+        {
+          href: "/crazy-lizard-army",
+          imgSrc: "https://lh3.googleusercontent.com/Qg1YzUN_XOtHrX_MnilRbm29CTA-oNscS9dkVbSGKrzoxHImq5lOrON7H-COBqekKo7ZDENj-8y2Gp7bXxJkhEwid_XiI-9LgTDBzg=s120",
+          name: "Crazy Lizard Army"
+        },
+        {
+          href: "/pudgypenguins",
+          imgSrc: "https://lh3.googleusercontent.com/bcCd1TfusKK6wWjmshwmizmY9j7An3pp9kxopMxfIt-_I8WFnSIK-5gevOduoYK4Qpq2e3DyXgROKNfkP396W5ViEYXhxoyAZG3s_vY=s120",
+          name: "Pudgy Penguins"
+        },
       ]
     }
   )

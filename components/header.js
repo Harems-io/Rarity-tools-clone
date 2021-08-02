@@ -1,10 +1,25 @@
+import {useState} from 'react'
 
-export default function Header() {
+import NavCollectionItem from "./nav-collection-item"
+import NavNewItem from "./nav-new-item"
+import SearchBar from "./search-bar"
+
+export default function Header({collectionsList, newList}) {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [allCollections, setAllCollections] = useState(collectionsList)
 
   function toggleDarkMode() {
     const el = document.querySelector('html');
     console.log(el.className);
     el.className = el.className == 'dark' ? '' : 'dark';
+  }
+
+  function editSearchTerm(e) {
+    setSearchTerm(e.target.value)
+  }
+
+  function searchByName() {
+    return allCollections.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
   }
 
   return (
@@ -34,45 +49,13 @@ export default function Header() {
                     focus-within:border-pink-600
                     flex-nowrap
                   ">
-                <div className="ml-2 text-gray-400 bgInput">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-search">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-                  </svg>
-                </div>
-                <input spellCheck="false" placeholder="Search by Project Name ..." className="block w-full pl-1 ml-1 text-base text-gray-700 placeholder-pink-400 outline-none  bgInput bg-none lg:ml-0 search textInput" />
+                  <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               </div>
             </div>
             <div className="mt-2 ml-4 font-bold textColor700">By 7 Day Volume</div>
-            <a href="/cryptopunks" className="">
-              <div className="flex flex-row items-center px-4 py-2 space-x-3 cursor-pointer select-none  hover:bg-gray-100 dark:hover:bg-gray-800">
-                <div className="w-6 text-base font-bold text-right text-gray-400">#1</div>
-                <div><img src="https://lh3.googleusercontent.com/BdxvLseXcfl57BiuQcQYdJ64v-aI8din7WPk0Pgo3qQFhAUH-B6i-dCqqc_mCkRIzULmwzwecnohLhrcH8A9mpWIZqA7ygc52Sr81hE=s120" className="w-16 h-auto rounded-full" style={{maxWidth: "40px"}} /></div>
-                <div>
-                  <div className="text-sm font-bold text-pink-600 dark:text-gray-300"> CryptoPunks </div>
-                  <div className="text-sm font-bold text-gray-400"> 31,681.92 ETH </div>
-                </div>
-              </div>
-            </a>
-            <a href="/vogu" className="">
-              <div className="flex flex-row items-center px-4 py-2 space-x-3 cursor-pointer select-none  hover:bg-gray-100 dark:hover:bg-gray-800">
-                <div className="w-6 text-base font-bold text-right text-gray-400">#2</div>
-                <div><img src="https://lh3.googleusercontent.com/4kPtQ8iep2Sw8MEV8TLfGuDsX0ql5pfniHZZGpwx3jp9D2ZRCE0coFxagGrhFH0sfVUezN1O-aRy9SZDong-N0RNsHgCg2rvX7LSJw=s120" className="w-16 h-auto rounded-full" style={{maxWidth: "40px"}} /></div>
-                <div>
-                  <div className="text-sm font-bold text-pink-600 dark:text-gray-300"> The Vogu Collective </div>
-                  <div className="text-sm font-bold text-gray-400"> 3,307.34 ETH </div>
-                </div>
-              </div>
-            </a>
-            <a href="/stoner-cats-official" className="">
-              <div className="flex flex-row items-center px-4 py-2 space-x-3 cursor-pointer select-none  hover:bg-gray-100 dark:hover:bg-gray-800">
-                <div className="w-6 text-base font-bold text-right text-gray-400">#3</div>
-                <div><img src="https://lh3.googleusercontent.com/7KkOAh6-6ORJVtcprl2iyvyJBuvk2UWuXdimcH7w82wRUPW4DsOtHmuptg7S9BsOlRQhhU2m6z1ec5ZnWhvFY05L1tpSUUIh35Q9=s120" className="w-16 h-auto rounded-full" style={{maxWidth: "40px"}} /></div>
-                <div>
-                  <div className="text-sm font-bold text-pink-600 dark:text-gray-300"> Stoner Cats </div>
-                  <div className="text-sm font-bold text-gray-400"> 3,025.7 ETH </div>
-                </div>
-              </div>
-            </a>
+            {
+              searchByName().map( (item, i) => {return(<NavCollectionItem data={item} number={i} key={`navCollectionItem_${i}`} />)})
+            }
           </div>
         </div>
         <div className="border-r border-gray-600" style={{height: "60%"}}></div>
@@ -81,30 +64,9 @@ export default function Header() {
         </div>
         <div className="ml-2 mr-4 border-r border-gray-600 md:block" style={{height: "60%"}}></div>
         <div className="flex-row flex-wrap items-baseline hidden h-full pr-4 overflow-hidden md:flex"><a className="block mt-3 text-sm font-medium text-yellow-400">New!</a>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/ruumz" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/CUQJJatR5l3WEhqDwd88-tfi-tlzgMyMYbXdAtt5YLaq808VG5mwI5Fli5-bZ3U7KZgiTqVGOhwFhybPe5nHa1JS2hW3qhI8736s=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />RUUMZ</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/spookies-nft" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/AZPmZ_3B4vjbbdSx2K2P4eQBCfj60ApxDjM97otHdgLeNZTPvdGvpSfOa8oKD9E_eRlz-RSiJ-83Lj9sIIKKNaTuArPq_ITFBqJ0hw=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />Spookies NFT</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/long-neckie-ladies" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/eV3XbDmvPumzQMiWECbJK8P0LY3YlRYM6k4Xn5QmYMRy0yRxi5hsLJcFNxAp4JxpjpzRIwxpDdi83CdUa0nWl4BdtZTarelmG5Vu=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />Long Neckie Ladies</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/crazy-lizard-army" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/Qg1YzUN_XOtHrX_MnilRbm29CTA-oNscS9dkVbSGKrzoxHImq5lOrON7H-COBqekKo7ZDENj-8y2Gp7bXxJkhEwid_XiI-9LgTDBzg=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />Crazy Lizard Army</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/pudgypenguins" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/bcCd1TfusKK6wWjmshwmizmY9j7An3pp9kxopMxfIt-_I8WFnSIK-5gevOduoYK4Qpq2e3DyXgROKNfkP396W5ViEYXhxoyAZG3s_vY=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />Pudgy Penguins</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/party-penguins" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/2wlF4lC7DrqMlxzRWHWMql68YpZrn_dKPVx3GTUWLZOCgowIvIUCRDE96liQxEP7_cI8AWQd-q5jN82ofIJz8Gv0HeHXbC_rVI4qXGo=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />Party Penguins</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/scoopdogsquad" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/LL0-Zl8uIoYDud8DifJ8o5UacqUIGOgWmu7FXECZD1qTuou_FlwnQigbpfvbShrOzmueVWRzdnp_t1ePPFKIpjZybXyp-CPu8rXO-g=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />ScoopDog Squad</a>
-          </div>
-          <div className="py-2 text-gray-400 whitespace-nowrap">
-            <a href="/vogu" className="ml-4 text-sm font-medium hover:text-pink-300"><img src="https://lh3.googleusercontent.com/4kPtQ8iep2Sw8MEV8TLfGuDsX0ql5pfniHZZGpwx3jp9D2ZRCE0coFxagGrhFH0sfVUezN1O-aRy9SZDong-N0RNsHgCg2rvX7LSJw=s120" className="w-16 h-auto rounded-full inline" style={{maxWidth: "20px", verticalAlign: "middle", marginTop: "-5px", marginRight: "5px"}} />The Vogu Collective</a>
-          </div>
+          {
+            newList.map( (item, i) => {return(<NavNewItem data={item} key={`navNewItem_${i}`} />)})
+          }
         </div>
       </div>
       <div className="flex-grow"></div>

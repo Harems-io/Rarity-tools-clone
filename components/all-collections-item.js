@@ -1,4 +1,4 @@
-export default function AllCollectionsTable ({ number, data }) {
+export default function AllCollectionsItem ({ number, data }) {
   return (
     <tr className="text-right text-gray-800">
       <td>{number}</td>
