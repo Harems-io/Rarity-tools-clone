@@ -1,0 +1,334 @@
+.dark body{
+  --tw-bg-opacity:1;
+  background-color:rgba(31, 41, 55, var(--tw-bg-opacity));
+  --tw-text-opacity:1;
+  color:rgba(229, 231, 235, var(--tw-text-opacity))
+}
+.scrollColor::-webkit-scrollbar-thumb{
+  --tw-bg-opacity:1;
+  background-color:rgba(229, 231, 235, var(--tw-bg-opacity))
+}
+.dark .scrollColor::-webkit-scrollbar-thumb{
+  --tw-bg-opacity:1;
+  background-color:rgba(55, 65, 81, var(--tw-bg-opacity))
+}
+.scrollColor::-webkit-scrollbar-thumb{
+  --tw-border-opacity:1;
+  border-color:rgba(75, 85, 99, var(--tw-border-opacity));
+  border-width:1px;
+  -webkit-box-shadow:0 0 2px rgba(0,0,0,.5)
+}
+.scrollColor::-webkit-scrollbar-track{
+  --tw-bg-opacity:1;
+  background-color:rgba(209, 213, 219, var(--tw-bg-opacity))
+}
+.dark .scrollColor::-webkit-scrollbar-track{
+  --tw-bg-opacity:1;
+  background-color:rgba(24, 31, 38, var(--tw-bg-opacity))
+}
+.scrollColor::-webkit-scrollbar{
+  width:15px
+}
+.bg{
+  --tw-bg-opacity:1;
+  background-color:rgba(255, 255, 255, var(--tw-bg-opacity))
+}
+.dark .bg{
+  --tw-bg-opacity:1;
+  background-color:rgba(31, 41, 55, var(--tw-bg-opacity))
+}
+.bg{
+  transition-property:background-color, border-color, color, fill, stroke;
+  transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration:150ms
+}
+.dark .bgCard{
+  --tw-bg-opacity:1;
+  background-color:rgba(50, 53, 72, var(--tw-bg-opacity))
+}
+.bgCard{
+  transition-property:all;
+  transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration:150ms
+}
+.dark .bgInput{
+  --tw-bg-opacity:1;
+  background-color:rgba(55, 65, 81, var(--tw-bg-opacity))
+}
+.bgInput{
+  --tw-border-opacity:1;
+  border-color:rgba(75, 85, 99, var(--tw-border-opacity));
+  transition-property:background-color, border-color, color, fill, stroke;
+  transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration:150ms
+}
+.borderLine{
+  --tw-border-opacity:1;
+  border-color:rgba(209, 213, 219, var(--tw-border-opacity))
+}
+.dark .borderLine{
+  --tw-border-opacity:1;
+  border-color:rgba(107, 114, 128, var(--tw-border-opacity))
+}
+.borderLine{
+  transition-property:background-color, border-color, color, fill, stroke;
+  transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration:150ms
+}
+.dark .textInput{
+  --tw-text-opacity:1;
+  color:rgba(209, 213, 219, var(--tw-text-opacity))
+}
+.textColor600{
+  --tw-text-opacity:1;
+  color:rgba(219, 39, 119, var(--tw-text-opacity))
+}
+.dark .textColor600{
+  --tw-text-opacity:1;
+  color:rgba(219, 39, 119, var(--tw-text-opacity))
+}
+.textColor700{
+  --tw-text-opacity:1;
+  color:rgba(190, 24, 93, var(--tw-text-opacity))
+}
+.dark .textColor700{
+  --tw-text-opacity:1;
+  color:rgba(219, 39, 119, var(--tw-text-opacity))
+}
+.textColor700OrWhite{
+  --tw-text-opacity:1;
+  color:rgba(190, 24, 93, var(--tw-text-opacity))
+}
+.dark .textColor700OrWhite{
+  --tw-text-opacity:1;
+  color:rgba(209, 213, 219, var(--tw-text-opacity))
+}
+.link{
+  cursor:pointer
+}
+.link:hover{
+  text-decoration:underline
+}
+@media (min-width:1024px){
+.sidebar{
+    min-width:250px;
+    max-width:250px
+}
+}
+.btn:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.smallBtn{
+  background-color:transparent;
+  --tw-bg-opacity:1;
+  background-color:rgba(190, 24, 93, var(--tw-bg-opacity))
+}
+.smallBtn:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(157, 23, 77, var(--tw-bg-opacity))
+}
+.dark .smallBtn{
+  --tw-bg-opacity:1;
+  background-color:rgba(157, 23, 77, var(--tw-bg-opacity))
+}
+.dark .smallBtn:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.smallBtn{
+  border-color:transparent;
+  border-radius:0.5rem;
+  border-width:1px;
+  cursor:pointer;
+  display:inline-block;
+  font-size:0.875rem;
+  line-height:1.25rem;
+  outline:2px solid transparent;
+  outline-offset:2px;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+.smallBtn:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.bigBtn{
+  padding:0.125rem;
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none;
+  background-color:transparent;
+  --tw-bg-opacity:1;
+  background-color:rgba(190, 24, 93, var(--tw-bg-opacity))
+}
+.bigBtn:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(157, 23, 77, var(--tw-bg-opacity))
+}
+.dark .bigBtn{
+  --tw-bg-opacity:1;
+  background-color:rgba(157, 23, 77, var(--tw-bg-opacity))
+}
+.dark .bigBtn:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.bigBtn{
+  border-color:transparent;
+  border-radius:0.5rem;
+  border-width:1px;
+  cursor:pointer;
+  display:inline-block;
+  font-size:0.875rem;
+  line-height:1.25rem;
+  outline:2px solid transparent;
+  outline-offset:2px;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+.bigBtn:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.bigBtnUnselect{
+  --tw-bg-opacity:1;
+  background-color:rgba(255, 255, 255, var(--tw-bg-opacity))
+}
+.bigBtnUnselect:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(252, 231, 243, var(--tw-bg-opacity))
+}
+.dark .bigBtnUnselect{
+  --tw-bg-opacity:1;
+  background-color:rgba(107, 114, 128, var(--tw-bg-opacity))
+}
+.bigBtnUnselect{
+  --tw-border-opacity:1;
+  border-color:rgba(190, 24, 93, var(--tw-border-opacity))
+}
+.dark .bigBtnUnselect{
+  --tw-border-opacity:1;
+  border-color:rgba(75, 85, 99, var(--tw-border-opacity))
+}
+.bigBtnUnselect{
+  border-radius:0.5rem;
+  border-width:1px;
+  cursor:pointer;
+  display:inline-block;
+  font-size:0.875rem;
+  line-height:1.25rem;
+  outline:2px solid transparent;
+  outline-offset:2px;
+  padding:0.125rem;
+  padding-left:0.5rem;
+  padding-right:0.5rem
+}
+.dark .bigBtnUnselect{
+  --tw-text-opacity:1;
+  color:rgba(209, 213, 219, var(--tw-text-opacity))
+}
+.bigBtnUnselect{
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none;
+  transition-property:background-color, border-color, color, fill, stroke;
+  transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration:150ms;
+  --tw-text-opacity:1;
+  color:rgba(190, 24, 93, var(--tw-text-opacity))
+}
+.dark .bigBtnUnselect{
+  --tw-text-opacity:1;
+  color:rgba(219, 39, 119, var(--tw-text-opacity))
+}
+.dark div.bigBtnUnselect{
+  --tw-text-opacity:1;
+  color:rgba(229, 231, 235, var(--tw-text-opacity))
+}
+.dark div.bigBtnUnselect:hover{
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+.dark a.bigBtnUnselect{
+  --tw-text-opacity:1;
+  color:rgba(229, 231, 235, var(--tw-text-opacity))
+}
+.dark a.bigBtnUnselect:hover{
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+.bigBtnUnselect:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(249, 168, 212, var(--tw-bg-opacity))
+}
+.dark .bigBtnUnselect:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(75, 85, 99, var(--tw-bg-opacity))
+}
+.loadMoreBtn{
+  background-color:transparent;
+  --tw-bg-opacity:1;
+  background-color:rgba(190, 24, 93, var(--tw-bg-opacity))
+}
+.loadMoreBtn:hover{
+  --tw-bg-opacity:1;
+  background-color:rgba(157, 23, 77, var(--tw-bg-opacity))
+}
+.loadMoreBtn{
+  border-color:transparent;
+  border-radius:0.5rem;
+  border-width:1px;
+  cursor:pointer;
+  display:block;
+  font-weight:700;
+  font-size:1.25rem;
+  line-height:1.75rem;
+  margin:auto;
+  margin-left:1rem;
+  margin-right:1rem;
+  outline:2px solid transparent;
+  outline-offset:2px;
+  padding-top:0.5rem;
+  padding-bottom:0.5rem;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  text-align:center;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity));
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none
+}
+.loadMoreBtn:active{
+  --tw-bg-opacity:1;
+  background-color:rgba(131, 24, 67, var(--tw-bg-opacity))
+}
+.smallNoBtn{
+  background-color:transparent;
+  display:inline-block;
+  font-weight:700;
+  font-size:0.875rem;
+  line-height:1.25rem;
+  margin-left:0.125rem;
+  margin-right:0.125rem;
+  outline:2px solid transparent;
+  outline-offset:2px;
+  padding-left:0.125rem;
+  padding-right:0.125rem
+}
+.notes a{
+  text-decoration:underline
+}
+.notes ul li{
+  margin-left:0.75rem;
+  list-style:inside;
+  list-style-type:disc
+}
