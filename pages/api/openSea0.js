@@ -9,32 +9,26 @@ const TOP10_LISTS = {
 }
 
 module.exports = async (req, res) => {
-  const url = "https://api.opensea.io/api/v1/collections?offset=0&limit=300";
+  const url = "https://api.opensea.io/api/v1/collections?offset=0&limit=10";
   const options = { method: "GET" };
 
   const data = await fetch(url, options)
     .then(res2 => res2.json())
     .catch(err => console.error("error:" + err))
 
-  // const allCollections = data["collections"]
-  // const top10by7DayVol = data["collections"].slice(0,9)
-  // const top10by7DayVol = data["collections"].slice(0,9)
-  // const top10by7DayVol = data["collections"].slice(0,9)
-  // const top10by7DayVol = data["collections"].slice(0,9)
-
+  const collections = data["collections"].filter(c => c.stats.total_volume > 0)
 
   const top10ByStat = (stat) => {
-    return sortByStat(data["collections"], ["stats", stat]).slice(0, 10)
+    return sortByStat(collections, ["stats", stat]).slice(0, 10)
   }
 
-  let returnObj = { allCollections: data["collections"] }
+  let returnObj = { allCollections: collections }
 
   Object.keys(TOP10_LISTS).forEach((k) => {
     const val = TOP10_LISTS[k]
 
     returnObj[k] = top10ByStat(val.stat).map((item) => {
       item["value"] = `${item.stats[val.stat]} ${val.unit}`
-      console.log(item)
       return item
     })
   })

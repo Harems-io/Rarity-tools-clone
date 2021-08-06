@@ -82,7 +82,7 @@ export default function Home(props) {
             <TopListCard title="By Owner Count" list={props.top10byNumOwners} unit="Owners" />
         	</div>
         </div>
-        {/*
+
         <div className="mt-16">
           <h2 className="mb-4 text-3xl font-extrabold text-center textColor700">All Collections</h2>
           <div className="flex flex-row justify-center mt-6">
@@ -112,7 +112,6 @@ export default function Home(props) {
         		</div>
         	</div>
         </div>
-        */}
     </Layout>
   )
 }

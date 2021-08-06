@@ -1,11 +1,6 @@
+import formattedDate from "../util/date"
+
 export default function CollectionCard ({ data }) {
-  const formattedDate = (date) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' }
-    let fDate = new Date(date)
-
-    return fDate.toLocaleDateString("en-US", options)
-  }
-
   return(
     <div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       <div className="w-72">
