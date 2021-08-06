@@ -1,4 +1,11 @@
 export default function CollectionCard ({ data }) {
+  const formattedDate = (date) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' }
+    let fDate = new Date(date)
+
+    return fDate.toLocaleDateString("en-US", options)
+  }
+
   return(
     <div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       <div className="w-72">
@@ -9,19 +16,19 @@ export default function CollectionCard ({ data }) {
             {
               data.featured == "true" && <div className="absolute w-full font-bold text-center text-white bg-pink-700">Featured</div>
             }
-            <img src={data.imgHeadSrc} className="object-cover object-center w-full h-full"   />
+            <img src={data.banner_image_url} className="object-cover object-center w-full h-full"   />
           </div>
           <div className="flex flex-row mt-2">
             <div className="p-2 ml-2">
               <div className="font-bold text-pink-600 dark:text-gray-300">{data.name}</div>
-              <div className="text-sm text-gray-400">Added {data.addedDate}</div>
-              <div className="text-sm text-gray-400">Owners: {data.ownersAmount}</div>
-              <div className="text-sm text-gray-400">Total Volume: {data.volume} {data.currency}</div>
+              <div className="text-sm text-gray-400">Added {formattedDate(data.created_date)}</div>
+              <div className="text-sm text-gray-400">Owners: {data.stats.num_owners}</div>
+              <div className="text-sm text-gray-400">Total Volume: {data.stats.total_volume} ETH</div>
             </div>
             <div className="flex-grow"></div>
-            <div className="mt-3 mr-3" style={{maxWidth: "3rem"}}> <img src={data.imgIconSrc} className="w-16 h-auto rounded-full" /> </div>
+            <div className="mt-3 mr-3" style={{maxWidth: "3rem"}}> <img src={data.image_url} className="w-16 h-auto rounded-full" /> </div>
           </div>
-          <div className="p-4 pt-2 text-sm notes dark:text-gray-300" dangerouslySetInnerHTML={{ __html: data.descRawHtml}} />
+          <div className="p-4 pt-2 text-sm notes dark:text-gray-300" dangerouslySetInnerHTML={{ __html: `<p></p>${data.feature_description || "Description"}` }} />
         </a>
       </div>
     </div>

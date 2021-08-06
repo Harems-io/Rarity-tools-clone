@@ -63,11 +63,13 @@ export default function Header({collectionsList, newList}) {
           <div className="py-2 text-gray-400 whitespace-nowrap" style={{marginTop: "1px"}}><a href="/upcoming" className="text-sm font-medium hover:text-pink-300 whitespace-nowrap">Upcoming</a></div>
         </div>
         <div className="ml-2 mr-4 border-r border-gray-600 md:block" style={{height: "60%"}}></div>
+        {/*
         <div className="flex-row flex-wrap items-baseline hidden h-full pr-4 overflow-hidden md:flex"><a className="block mt-3 text-sm font-medium text-yellow-400">New!</a>
           {
             newList.map( (item, i) => {return(<NavNewItem data={item} key={`navNewItem_${i}`} />)})
           }
         </div>
+        */}
       </div>
       <div className="flex-grow"></div>
       <div className="flex flex-row items-center h-full">

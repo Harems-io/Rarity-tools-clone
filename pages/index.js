@@ -25,15 +25,15 @@ const fetcher = url => fetch(url).then(res => res.json());
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req)
-  const apiURL = `${origin}/api/openSea`
+  const apiURL = `${origin}/api/openSea0`
   const data = await fetcher(apiURL)
+  // data["newData"] = await fetcher(`${origin}/api/openSea0`)
   return { props: data}
 }
 
 export default function Home(props) {
   const [searchTerm, setSearchTerm] = useState("")
   const [allCollections, setAllCollections] = useState(props.allCollections)
-
 
   function editSearchTerm(e) {
     setSearchTerm(e.target.value)
@@ -58,7 +58,7 @@ export default function Home(props) {
     				<div className="flex flex-row flex-wrap justify-around">
               {
                 [...Array(COLLECTION_TOTAL_NUM / COLLECTIONS_PER_ROW).keys()].map((i) => {
-                  const dataForGroup = props.collections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
+                  const dataForGroup = props.allCollections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
 
                   const insertAd = (i % 2) == 0;
 
@@ -74,6 +74,7 @@ export default function Home(props) {
             <RightAd href="https://osirismetaverse.com/cosmic" imgSrc="https://ewr1.vultrobjects.com/current/cosmickids_vert_d" />
     			</div>
     		</div>
+        {/*
         <div>
         	<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Top Collections</h2>
         	<div className="flex flex-row flex-wrap justify-center">
@@ -83,6 +84,7 @@ export default function Home(props) {
             <TopListCard title="By Owner Count" list={props.top10by7DayVol} unit="Owners" />
         	</div>
         </div>
+
         <div className="mt-16">
           <h2 className="mb-4 text-3xl font-extrabold text-center textColor700">All Collections</h2>
           <div className="flex flex-row justify-center mt-6">
@@ -112,6 +114,7 @@ export default function Home(props) {
         		</div>
         	</div>
         </div>
+        */}
     </Layout>
   )
 }
