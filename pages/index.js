@@ -59,7 +59,6 @@ export default function Home(props) {
               {
                 [...Array(COLLECTION_TOTAL_NUM / COLLECTIONS_PER_ROW).keys()].map((i) => {
                   const dataForGroup = props.allCollections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
-
                   const insertAd = (i % 2) == 0;
 
                   if (dataForGroup.length) {
@@ -74,17 +73,16 @@ export default function Home(props) {
             <RightAd href="https://osirismetaverse.com/cosmic" imgSrc="https://ewr1.vultrobjects.com/current/cosmickids_vert_d" />
     			</div>
     		</div>
-        {/*
         <div>
         	<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Top Collections</h2>
         	<div className="flex flex-row flex-wrap justify-center">
             <TopListCard title="By 7 Day Volume" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By Total Volume" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By Owner Count" list={props.top10by7DayVol} unit="Owners" />
+            <TopListCard title="By Total Volume" list={props.top10byTotalVol} unit="ETH" />
+            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayAvgPrice} unit="ETH" />
+            <TopListCard title="By Owner Count" list={props.top10byNumOwners} unit="Owners" />
         	</div>
         </div>
-
+        {/*
         <div className="mt-16">
           <h2 className="mb-4 text-3xl font-extrabold text-center textColor700">All Collections</h2>
           <div className="flex flex-row justify-center mt-6">

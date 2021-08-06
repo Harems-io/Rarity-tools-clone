@@ -2,6 +2,8 @@ import {useState} from 'react'
 
 import AllCollectionsRow from "./all-collections-row"
 
+import sortByStat from "../util/sort"
+
 const COL_NAMES = {
   vol7day: "Volume (7d)",
   sales7day: "Sales (7d)",
@@ -17,31 +19,9 @@ const COL_NAMES = {
 export default function AllCollectionsTable ({ data, currency }) {
   const [sortedField, setSortedField] = useState("vol7day")
 
-  function parseForSort(str) {
-    const numberA = Number(str.split(",").join(""))
-
-    if (numberA === 0) {
-      return 0
-    } else if(!numberA) {
-      return str
-    } else {
-      return numberA
-    }
-  }
-
   function getSortedData(){
     if (sortedField !== null) {
-      return data.sort((a, b) => {
-        const aVal = parseForSort(a[sortedField])
-        const bVal = parseForSort(b[sortedField])
-        if (aVal < bVal) {
-          return 1;
-        }
-        if (aVal > bVal) {
-          return -1;
-        }
-        return 0;
-      });
+      return sortByStat(data, ['stats', sortedField])
     }
     return data
   }
