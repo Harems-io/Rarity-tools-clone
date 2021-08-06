@@ -1,6 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import sortByStat from "../../util/sort"
 
+const TOP10_LISTS = {
+  top10by7DayVol: {stat: "seven_day_volume", unit: "ETH"},
+  top10byTotalVol: {stat: "total_volume", unit: "ETH"},
+  top10by7DayAvgPrice: {stat: "seven_day_average_price", unit: "ETH"},
+  top10byNumOwners: {stat: "num_owners", unit: "Owners"}
+}
+
 module.exports = async (req, res) => {
   const url = "https://api.opensea.io/api/v1/collections?offset=0&limit=300";
   const options = { method: "GET" };
@@ -20,11 +27,17 @@ module.exports = async (req, res) => {
     return sortByStat(data["collections"], ["stats", stat]).slice(0, 10)
   }
 
-  res.status(200).json({
-    allCollections: data["collections"],
-    top10by7DayVol: top10ByStat("seven_day_volume"),
-    top10byTotalVol: top10ByStat("total_volume"),
-    top10by7DayAvgPrice: top10ByStat("seven_day_average_price"),
-    top10byNumOwners: top10ByStat("num_owners")
+  let returnObj = { allCollections: data["collections"] }
+
+  Object.keys(TOP10_LISTS).forEach((k) => {
+    const val = TOP10_LISTS[k]
+
+    returnObj[k] = top10ByStat(val.stat).map((item) => {
+      item["value"] = `${item.stats[val.stat]} ${val.unit}`
+      console.log(item)
+      return item
+    })
   })
+
+  res.status(200).json(returnObj)
 }

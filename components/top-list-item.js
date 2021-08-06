@@ -8,7 +8,7 @@ export default function TopListItem({number, data, unit}) {
         <div><img src={data.image_url} className="w-16 h-auto rounded-full" style={{maxWidth: "40px", maxHeight: "40px"}}  /></div>
         <div>
           <div className="text-base font-bold text-pink-600 dark:text-gray-300">{data.name}</div>
-          <div className="text-sm font-bold text-gray-400"> {data.stats.seven_day_volume} {unit} </div>
+          <div className="text-sm font-bold text-gray-400"> {data.value}</div>
         </div>
       </div>
     </Link>
