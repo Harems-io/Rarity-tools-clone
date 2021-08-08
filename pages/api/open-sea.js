@@ -17,9 +17,8 @@ const top10ByStat = (collectionArray, stat) => {
 
 const addAdditionalAttributes = (collectionsArray) => {
   return collectionsArray.map((c) => {
-    const ownerPct = c.stats.num_owners / c.stats.total_supply
+    c.stats["owner_pct"] = c.stats.num_owners / c.stats.total_supply
 
-    c.stats["owner_pct"] = round2Dec(ownerPct)
     return c
   })
 }
