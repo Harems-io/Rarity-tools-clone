@@ -22,14 +22,14 @@
 //   }
 // }
 
-export default function sortByStat(list, statPath) {
+export default function sortByStat(list, pathArr) {
   return list.sort((a, b) => {
 
     let aVal = a
     let bVal = b
 
-    if (statPath.length > 1) {
-      statPath.forEach((pathElement) => {
+    if (pathArr.length > 1) {
+      pathArr.forEach((pathElement) => {
         aVal = aVal[pathElement]
         bVal = bVal[pathElement]
       })

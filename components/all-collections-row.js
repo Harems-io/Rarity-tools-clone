@@ -17,7 +17,7 @@ export default function AllCollectionsItem ({ number, data, currency }) {
       <td>{data.stats.seven_day_average_price} {currency}</td>
       <td>{data.stats.total_supply}</td>
       <td>{data.stats.num_owners}</td>
-      <td>{data.stats.ownersPct}</td>
+      <td>{(100 * data.stats.num_owners / data.stats.total_supply).toFixed(2) }%</td>
       <td>{data.stats.market_cap} {currency}</td>
       <td>{data.stats.total_volume} {currency}</td>
       <td>{data.stats.total_sales}</td>

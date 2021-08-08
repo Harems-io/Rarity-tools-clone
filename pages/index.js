@@ -25,7 +25,7 @@ const fetcher = url => fetch(url).then(res => res.json());
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req)
-  const apiURL = `${origin}/api/openSea0`
+  const apiURL = `${origin}/api/open-sea`
   const data = await fetcher(apiURL)
   // data["newData"] = await fetcher(`${origin}/api/openSea0`)
   return { props: data}
@@ -76,10 +76,10 @@ export default function Home(props) {
         <div>
         	<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Top Collections</h2>
         	<div className="flex flex-row flex-wrap justify-center">
-            <TopListCard title="By 7 Day Volume" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By Total Volume" list={props.top10byTotalVol} unit="ETH" />
-            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayAvgPrice} unit="ETH" />
-            <TopListCard title="By Owner Count" list={props.top10byNumOwners} unit="Owners" />
+            <TopListCard title="By 7 Day Volume" list={props.top10by7DayVol} />
+            <TopListCard title="By Total Volume" list={props.top10byTotalVol} />
+            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayAvgPrice} />
+            <TopListCard title="By Owner Count" list={props.top10byNumOwners} />
         	</div>
         </div>
 

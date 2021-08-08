@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import sortByStat from "../../util/sort"
+import sortByPath from "../../util/sort"
 
 const TOP10_LISTS = {
   top10by7DayVol: {stat: "seven_day_volume", unit: "ETH"},
@@ -9,17 +9,19 @@ const TOP10_LISTS = {
 }
 
 module.exports = async (req, res) => {
-  const url = "https://api.opensea.io/api/v1/collections?offset=0&limit=10";
+  const url = "https://api.opensea.io/api/v1/collections?offset=0&limit=300";
   const options = { method: "GET" };
 
   const data = await fetch(url, options)
     .then(res2 => res2.json())
     .catch(err => console.error("error:" + err))
 
-  const collections = data["collections"].filter(c => c.stats.total_volume > 0)
+  const collections = data["collections"].filter(c => c.stats.num_owners > 0)
 
   const top10ByStat = (stat) => {
-    return sortByStat(collections, ["stats", stat]).slice(0, 10)
+    const collectionsSubset = JSON.parse(JSON.stringify(collections))
+
+    return sortByPath(collectionsSubset, ["stats", stat]).slice(0, 10)
   }
 
   let returnObj = { allCollections: collections }
@@ -33,5 +35,6 @@ module.exports = async (req, res) => {
     })
   })
 
+  console.log(returnObj)
   res.status(200).json(returnObj)
 }
