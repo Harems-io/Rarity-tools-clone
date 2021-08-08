@@ -8,7 +8,7 @@ export default function TopListCard({title, list, unit}) {
         {
           list.map((item, i) => {
             return(
-              <TopListItem number={i + 1} data={item} unit={unit} key={`top-list-item-${item.name}`} />
+              <TopListItem number={i + 1} data={item} key={`top-list-item-${item.name}`} />
             )
           })
         }

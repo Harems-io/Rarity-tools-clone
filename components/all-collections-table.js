@@ -2,46 +2,26 @@ import {useState} from 'react'
 
 import AllCollectionsRow from "./all-collections-row"
 
+import { sortByPath } from "../util/sort"
+
 const COL_NAMES = {
-  vol7day: "Volume (7d)",
-  sales7day: "Sales (7d)",
-  avgPrice7day: "Avg Price (7d)",
-  totalSupply: "Total Supply",
-  owners: "Owners",
-  ownersPct: "Owners%",
-  estMarketCap: "Estimated Market Cap",
-  volAllTime: "Volume (All Time)",
-  salesAllTime: "Sales (All Time)",
-  addedDate: "Added"
+  seven_day_volume: "Volume (7d)",
+  seven_day_sales: "Sales (7d)",
+  seven_day_average_price: "Avg Price (7d)",
+  total_supply: "Total Supply",
+  num_owners: "Owners",
+  owner_pct: "Owners%",
+  market_cap: "Estimated Market Cap",
+  total_volume: "Volume (All Time)",
+  total_sales: "Sales (All Time)",
+  created_date: "Added"
 }
 export default function AllCollectionsTable ({ data, currency }) {
   const [sortedField, setSortedField] = useState("vol7day")
 
-  function parseForSort(str) {
-    const numberA = Number(str.split(",").join(""))
-
-    if (numberA === 0) {
-      return 0
-    } else if(!numberA) {
-      return str
-    } else {
-      return numberA
-    }
-  }
-
   function getSortedData(){
     if (sortedField !== null) {
-      return data.sort((a, b) => {
-        const aVal = parseForSort(a[sortedField])
-        const bVal = parseForSort(b[sortedField])
-        if (aVal < bVal) {
-          return 1;
-        }
-        if (aVal > bVal) {
-          return -1;
-        }
-        return 0;
-      });
+      return sortByPath(data, ['stats', sortedField])
     }
     return data
   }

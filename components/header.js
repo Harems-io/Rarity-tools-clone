@@ -1,16 +1,26 @@
-import {useState} from 'react'
+import { useState } from 'react'
+
+import { sortByPath } from "../util/sort"
 
 import NavCollectionItem from "./nav-collection-item"
 import NavNewItem from "./nav-new-item"
 import SearchBar from "./search-bar"
 
+const NAVBAR_SEARCH_SORT_FIELD = "seven_day_volume"
+
 export default function Header({collectionsList, newList}) {
   const [searchTerm, setSearchTerm] = useState("")
-  const [allCollections, setAllCollections] = useState(collectionsList)
+  const [allCollections, setAllCollections] = useState(
+    sortByPath(collectionsList, ["stats", NAVBAR_SEARCH_SORT_FIELD]).map((c, i) => {
+      c["rank"] = i + 1
+
+      return c
+    })
+  )
 
   function toggleDarkMode() {
     const el = document.querySelector('html');
-    console.log(el.className);
+
     el.className = el.className == 'dark' ? '' : 'dark';
   }
 
@@ -54,7 +64,7 @@ export default function Header({collectionsList, newList}) {
             </div>
             <div className="mt-2 ml-4 font-bold textColor700">By 7 Day Volume</div>
             {
-              searchByName().map( (item, i) => {return(<NavCollectionItem data={item} number={i} key={`navCollectionItem_${i}`} />)})
+              searchByName().map( (item) => {return(<NavCollectionItem data={item} key={`navCollectionItem_${item.rank}`} />)})
             }
           </div>
         </div>
@@ -63,11 +73,13 @@ export default function Header({collectionsList, newList}) {
           <div className="py-2 text-gray-400 whitespace-nowrap" style={{marginTop: "1px"}}><a href="/upcoming" className="text-sm font-medium hover:text-pink-300 whitespace-nowrap">Upcoming</a></div>
         </div>
         <div className="ml-2 mr-4 border-r border-gray-600 md:block" style={{height: "60%"}}></div>
+        {/*
         <div className="flex-row flex-wrap items-baseline hidden h-full pr-4 overflow-hidden md:flex"><a className="block mt-3 text-sm font-medium text-yellow-400">New!</a>
           {
             newList.map( (item, i) => {return(<NavNewItem data={item} key={`navNewItem_${i}`} />)})
           }
         </div>
+        */}
       </div>
       <div className="flex-grow"></div>
       <div className="flex flex-row items-center h-full">

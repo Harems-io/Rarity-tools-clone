@@ -25,15 +25,15 @@ const fetcher = url => fetch(url).then(res => res.json());
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req)
-  const apiURL = `${origin}/api/openSea`
+  const apiURL = `${origin}/api/open-sea`
   const data = await fetcher(apiURL)
+  // data["newData"] = await fetcher(`${origin}/api/openSea0`)
   return { props: data}
 }
 
 export default function Home(props) {
   const [searchTerm, setSearchTerm] = useState("")
   const [allCollections, setAllCollections] = useState(props.allCollections)
-
 
   function editSearchTerm(e) {
     setSearchTerm(e.target.value)
@@ -58,8 +58,7 @@ export default function Home(props) {
     				<div className="flex flex-row flex-wrap justify-around">
               {
                 [...Array(COLLECTION_TOTAL_NUM / COLLECTIONS_PER_ROW).keys()].map((i) => {
-                  const dataForGroup = props.collections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
-
+                  const dataForGroup = props.allCollections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
                   const insertAd = (i % 2) == 0;
 
                   if (dataForGroup.length) {
@@ -77,12 +76,13 @@ export default function Home(props) {
         <div>
         	<h2 className="mb-4 text-3xl font-extrabold text-center textColor700">Top Collections</h2>
         	<div className="flex flex-row flex-wrap justify-center">
-            <TopListCard title="By 7 Day Volume" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By Total Volume" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayVol} unit="ETH" />
-            <TopListCard title="By Owner Count" list={props.top10by7DayVol} unit="Owners" />
+            <TopListCard title="By 7 Day Volume" list={props.top10by7DayVol} />
+            <TopListCard title="By Total Volume" list={props.top10byTotalVol} />
+            <TopListCard title="By 7 Day Average Price" list={props.top10by7DayAvgPrice} />
+            <TopListCard title="By Owner Count" list={props.top10byNumOwners} />
         	</div>
         </div>
+
         <div className="mt-16">
           <h2 className="mb-4 text-3xl font-extrabold text-center textColor700">All Collections</h2>
           <div className="flex flex-row justify-center mt-6">
