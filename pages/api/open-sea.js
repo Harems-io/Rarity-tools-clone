@@ -44,7 +44,6 @@ function getFromOpenSea(url, waitIndex) {
 
 module.exports = async (req, res) => {
   let rawCollections = [];
-  let requests = [];
 
   const urls = [...Array(NUM_REQUESTS).keys()].map((i) => {
     return `https://api.opensea.io/api/v1/collections?offset=${i*MAX_COLLECTIONS_PER_REQUEST}&limit=${MAX_COLLECTIONS_PER_REQUEST}`
@@ -57,7 +56,7 @@ module.exports = async (req, res) => {
     })
   })
 
-  // only care about those that have owners
+  // only care about those that have volume
   const collections = rawCollections.filter(c => c.stats.total_volume > 0)
   let returnObj = {
     allCollections: addAdditionalAttributes(collections)
