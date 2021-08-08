@@ -22,7 +22,7 @@
 //   }
 // }
 
-export default function sortByStat(list, pathArr) {
+export function sortByPath(list, pathArr) {
   return list.sort((a, b) => {
 
     let aVal = a
