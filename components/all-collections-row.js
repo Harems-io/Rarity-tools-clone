@@ -12,14 +12,14 @@ export default function AllCollectionsItem ({ number, data, currency }) {
           </div>
         </a>
       </td>
-      <td>{data.stats.seven_day_volume} {currency}</td>
+      <td>{data.stats.seven_day_volume.toFixed(2)} {currency}</td>
       <td>{data.stats.seven_day_sales}</td>
-      <td>{data.stats.seven_day_average_price} {currency}</td>
+      <td>{data.stats.seven_day_average_price.toFixed(2)} {currency}</td>
       <td>{data.stats.total_supply}</td>
       <td>{data.stats.num_owners}</td>
       <td>{parseFloat(100 * data.stats.owner_pct).toFixed(2)}%</td>
-      <td>{data.stats.market_cap} {currency}</td>
-      <td>{data.stats.total_volume} {currency}</td>
+      <td>{data.stats.market_cap.toFixed(2)} {currency}</td>
+      <td>{data.stats.total_volume.toFixed(2)} {currency}</td>
       <td>{data.stats.total_sales}</td>
       <td>{formattedDate(data.created_date)}</td>
     </tr>
