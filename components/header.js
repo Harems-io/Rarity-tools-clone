@@ -1,16 +1,26 @@
-import {useState} from 'react'
+import { useState } from 'react'
+
+import { sortByPath } from "../util/sort"
 
 import NavCollectionItem from "./nav-collection-item"
 import NavNewItem from "./nav-new-item"
 import SearchBar from "./search-bar"
 
+const NAVBAR_SEARCH_SORT_FIELD = "seven_day_volume"
+
 export default function Header({collectionsList, newList}) {
   const [searchTerm, setSearchTerm] = useState("")
-  const [allCollections, setAllCollections] = useState(collectionsList)
+  const [allCollections, setAllCollections] = useState(
+    sortByPath(collectionsList, ["stats", NAVBAR_SEARCH_SORT_FIELD]).map((c, i) => {
+      c["rank"] = i + 1
+
+      return c
+    })
+  )
 
   function toggleDarkMode() {
     const el = document.querySelector('html');
-    console.log(el.className);
+
     el.className = el.className == 'dark' ? '' : 'dark';
   }
 
@@ -54,7 +64,7 @@ export default function Header({collectionsList, newList}) {
             </div>
             <div className="mt-2 ml-4 font-bold textColor700">By 7 Day Volume</div>
             {
-              searchByName().map( (item, i) => {return(<NavCollectionItem data={item} number={i} key={`navCollectionItem_${i}`} />)})
+              searchByName().map( (item) => {return(<NavCollectionItem data={item} key={`navCollectionItem_${item.rank}`} />)})
             }
           </div>
         </div>
