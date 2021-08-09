@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "ioredis": "^4.27.7",
     "next": "latest",
     "next-absolute-url": "^1.2.2",
     "react": "^17.0.2",

@@ -1,10 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import Redis from "ioredis"
+
 import { round2Dec } from "../../util/round"
 import { sortByPath } from "../../util/sort"
 
-const API_REQUEST_LIMIT_MS = 600
-const NUM_REQUESTS = 5
-const MAX_COLLECTIONS_PER_REQUEST = 300
+const CACHE_KEEP_TIME_S = 43200
+const API_REQUEST_LIMIT_MS = 750
+const TOTAL_REQUESTS = 10
+const MAX_REQUESTS_PER_CACHE_REQUEST = 2
+const MAX_COLLECTIONS_PER_REQUEST = 250
 const TOP10_LISTS = {
   top10by7DayVol: {stat: "seven_day_volume", unit: "ETH"},
   top10byTotalVol: {stat: "total_volume", unit: "ETH"},
@@ -30,6 +34,8 @@ const sleep = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+let redis = new Redis(process.env.REDIS_URL)
+
 function getFromOpenSea(url, waitIndex) {
   const options = { method: "GET" }
 
@@ -37,7 +43,7 @@ function getFromOpenSea(url, waitIndex) {
     sleep(waitIndex * API_REQUEST_LIMIT_MS).then( v => {
       fetch(url, options)
         .then(res2 => res2.json())
-        .then((data) => resolve(data["collections"]))
+        .then(data => resolve(data["collections"]))
     })
   });
 }
@@ -45,19 +51,55 @@ function getFromOpenSea(url, waitIndex) {
 module.exports = async (req, res) => {
   let rawCollections = [];
 
-  const urls = [...Array(NUM_REQUESTS).keys()].map((i) => {
-    return `https://api.opensea.io/api/v1/collections?offset=${i*MAX_COLLECTIONS_PER_REQUEST}&limit=${MAX_COLLECTIONS_PER_REQUEST}`
-  })
+  let start = Date.now();
+  let cache = await redis.get("cache")
+  cache = JSON.parse(cache)
+  let result = {}
 
-  const responses = await urls.map((url, i) => getFromOpenSea(url, i));
-  await Promise.all(responses).then((data) => {
-    data.forEach((response) => {
-      rawCollections = rawCollections.concat(response)
-    })
-  })
+  if (cache) {
+     console.log("loading from cache")
+     result.data = cache
+     result.type = "redis"
+     result.latency = Date.now() - start;
+     // return res.status(200).json(result)
+  } else {
+    console.log("loading from api")
 
-  // only care about those that have volume
-  const collections = rawCollections.filter(c => c.stats.total_volume > 0)
+    redis.set("cache", "", "EX", CACHE_KEEP_TIME_S)
+
+    // [...Array(cacheRequests).keys()].forEach(async(cReq) => {
+
+      const urls = [...Array(TOTAL_REQUESTS).keys()].map((i) => {
+        return `https://api.opensea.io/api/v1/collections?offset=${i*MAX_COLLECTIONS_PER_REQUEST}&limit=${MAX_COLLECTIONS_PER_REQUEST}`
+      })
+
+      const openSeaRequests = await urls.map((url, i) => getFromOpenSea(url, i));
+
+      let collectionsToCache = []
+
+      await Promise.all(openSeaRequests).then((data) => {
+        data.forEach((response, i) => {
+          // only care about those that have volume
+          const validCollections = response.filter(c => c.stats.total_volume > 0)
+
+          rawCollections = rawCollections.concat(validCollections)
+          collectionsToCache = collectionsToCache.concat(validCollections)
+
+          if ((i+1) % MAX_REQUESTS_PER_CACHE_REQUEST == 0) {
+            redis.append("cache", JSON.stringify(collectionsToCache))
+            collectionsToCache = []
+          }
+        })
+        result.data = rawCollections
+        result.type = "api"
+        result.latency = Date.now() - start;
+        // if ()MAX_REQUESTS_PER_CACHE_REQUEST
+
+      })
+    // })
+  }
+  const collections = result.data
+  // const collections = result.data.filter(c => c.stats.total_volume > 0)
   let returnObj = {
     allCollections: addAdditionalAttributes(collections)
   }

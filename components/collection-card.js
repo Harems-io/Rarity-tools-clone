@@ -23,7 +23,7 @@ export default function CollectionCard ({ data }) {
             <div className="flex-grow"></div>
             <div className="mt-3 mr-3" style={{maxWidth: "3rem"}}> <img src={data.image_url} className="w-16 h-auto rounded-full" /> </div>
           </div>
-          <div className="p-4 pt-2 text-sm notes dark:text-gray-300" dangerouslySetInnerHTML={{ __html: `<p></p>${data.feature_description || "Description"}` }} />
+          <div className="p-4 pt-2 text-sm notes dark:text-gray-300" dangerouslySetInnerHTML={{ __html: `${data.description || ". . ."}` }} />
         </a>
       </div>
     </div>
