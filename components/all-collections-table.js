@@ -17,7 +17,7 @@ const COL_NAMES = {
   created_date: "Added"
 }
 export default function AllCollectionsTable ({ data, currency }) {
-  const [sortedField, setSortedField] = useState("vol7day")
+  const [sortedField, setSortedField] = useState("seven_day_volume")
 
   function getSortedData(){
     if (sortedField !== null) {
