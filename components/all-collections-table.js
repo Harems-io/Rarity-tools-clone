@@ -34,7 +34,7 @@ export default function AllCollectionsTable ({ data, currency }) {
         {
           Object.keys(COL_NAMES).map((k,i) => {
             return(
-              <th className="font-normal" onClick={() => setSortedField(k)}>
+              <th className="font-normal" onClick={() => setSortedField(k)} key={`al_collections_heading_${k}`}>
                 {(sortedField === k) && <div className="absolute right-0 mt-1 -ml-1 text-xs">⏷</div>}
                 {COL_NAMES[k]}
               </th>
