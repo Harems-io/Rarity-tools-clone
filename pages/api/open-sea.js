@@ -117,7 +117,7 @@ module.exports = async (req, res) => {
     })
 
     const numCollections = rawCollections.length
-    console.log(numCollections)
+
     if(numCollections > 0 && numCollections <= MAX_COLLECTIONS_PER_CACHE_REQUEST) {
       redis.set("cache", JSON.stringify(rawCollections), "EX", CACHE_KEEP_TIME_S)
       firstEntrySet = true
