@@ -150,7 +150,10 @@ module.exports = async (req, res) => {
     const val = TOP10_LISTS[k]
 
     returnObj[k] = top10ByStat(collections, val.stat).map((item) => {
-      item["value"] = `${item.stats[val.stat]} ${val.unit}`
+      let valStr = val.unit == "ETH" ? item.stats[val.stat].toFixed(2) : item.stats[val.stat]
+
+      item["value"] = `${valStr} ${val.unit}`
+
       return item
     })
   })

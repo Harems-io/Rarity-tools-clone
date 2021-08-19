@@ -18,7 +18,7 @@ export default function CollectionCard ({ data }) {
               <div className="font-bold text-pink-600 dark:text-gray-300">{data.name}</div>
               <div className="text-sm text-gray-400">Added {formattedDate(data.created_date)}</div>
               <div className="text-sm text-gray-400">Owners: {data.stats.num_owners}</div>
-              <div className="text-sm text-gray-400">Total Volume: {data.stats.total_volume} ETH</div>
+              <div className="text-sm text-gray-400">Total Volume: {data.stats.total_volume.toFixed(2)} ETH</div>
             </div>
             <div className="flex-grow"></div>
             <div className="mt-3 mr-3" style={{maxWidth: "3rem"}}> <img src={data.image_url} className="w-16 h-auto rounded-full" /> </div>
