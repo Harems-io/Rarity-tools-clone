@@ -63,7 +63,7 @@ const sleep = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-let redis = new Redis(process.env.REDIS_URL)
+const redis = new Redis(process.env.REDIS_URL)
 
 function getFromOpenSea(url, waitIndex) {
   const options = { method: "GET" }
@@ -77,82 +77,66 @@ function getFromOpenSea(url, waitIndex) {
   });
 }
 
-module.exports = async (req, res) => {
-  let cache = JSON.parse(await redis.get("cache"))
+const loadFromOpenSeaAPI =  async () => {
   let rawCollections = [];
-  let result = {}
-  let start = Date.now();
 
-  // for now, only use cache on development so that I don't have to wait forever for site to load
-  if (cache && process.env.NODE_ENV == 'development') {
-     console.log("loading from cache")
-     result.data = cache
-     result.latency = Date.now() - start;
-     result.type = "redis"
-  } else {
-    console.log("loading from api")
+  const urls = [...Array(TOTAL_REQUESTS).keys()].map((i) => {
+    return `https://api.opensea.io/api/v1/collections?offset=${i*MAX_COLLECTIONS_PER_REQUEST}&limit=${MAX_COLLECTIONS_PER_REQUEST}`
+  })
+  const openSeaRequests = await urls.map((url, i) => getFromOpenSea(url, i));
 
-    const urls = [...Array(TOTAL_REQUESTS).keys()].map((i) => {
-      return `https://api.opensea.io/api/v1/collections?offset=${i*MAX_COLLECTIONS_PER_REQUEST}&limit=${MAX_COLLECTIONS_PER_REQUEST}`
-    })
-    const openSeaRequests = await urls.map((url, i) => getFromOpenSea(url, i));
-
-    let collectionsToCache = []
-    let firstEntrySet = false;
-    let numCached = 0;
-
-    await Promise.all(openSeaRequests).then((data) => {
-      for(let response of data){
-        if (!response) {
-          continue;
-        }
-
-        // only care about those that have volume > 1 ETH and aren't Untitled Collections
-        let validCollections = response.filter(c => c.stats.seven_day_volume > 1 && !c.name.startsWith("Untitled Collection"))
-
-        validCollections = validCollections.map(c => {
-          let newC = {"stats": {}};
-
-          rootFields.forEach(f => newC[f] = c[f])
-          statFields.forEach(f => newC["stats"][f] = c["stats"][f])
-
-          return newC
-        })
-        rawCollections = rawCollections.concat(validCollections)
+  await Promise.all(openSeaRequests).then((data) => {
+    for(let response of data){
+      if (!response) {
+        continue;
       }
 
-      result.data = rawCollections
-      result.latency = Date.now() - start;
-      result.type = "api"
-    })
+      // only care about those that have volume > 1 ETH and aren't Untitled Collections
+      let validCollections = response.filter(c => c.stats.seven_day_volume > 1 && !c.name.startsWith("Untitled Collection"))
 
-    const numCollections = rawCollections.length
+      validCollections = validCollections.map(c => {
+        let newC = {"stats": {}};
 
-    if(numCollections > 0 && numCollections <= MAX_COLLECTIONS_PER_CACHE_REQUEST) {
-      redis.set("cache", JSON.stringify(rawCollections), "EX", CACHE_KEEP_TIME_S)
-      firstEntrySet = true
-    } else if (numCollections > MAX_COLLECTIONS_PER_CACHE_REQUEST) {
+        rootFields.forEach(f => newC[f] = c[f])
+        statFields.forEach(f => newC["stats"][f] = c["stats"][f])
 
-      redis.set("cache", "[", "EX", CACHE_KEEP_TIME_S)
-
-      let remainder = numCollections
-      let offset = 0
-      let toCache = []
-      while (remainder > 0) {
-        let offsetEnd = offset + Math.min(remainder, MAX_COLLECTIONS_PER_CACHE_REQUEST)
-        toCache = JSON.stringify(rawCollections.slice(offset, offsetEnd)).slice(1,-1)
-
-        toCache = offset == 0 ? toCache : `,${toCache}`
-
-        remainder -= MAX_COLLECTIONS_PER_CACHE_REQUEST
-        offset += MAX_COLLECTIONS_PER_CACHE_REQUEST
-      }
-
-      redis.append("cache", "]")
+        return newC
+      })
+      rawCollections = rawCollections.concat(validCollections)
     }
-  }
-  const collections = result.data
+  })
 
+  return rawCollections
+}
+
+const refreshCache = (collections) => {
+  const numCollections = collections.length
+
+  if(numCollections > 0 && numCollections <= MAX_COLLECTIONS_PER_CACHE_REQUEST) {
+    redis.set("cache", JSON.stringify(collections), "EX", CACHE_KEEP_TIME_S)
+  } else if (numCollections > MAX_COLLECTIONS_PER_CACHE_REQUEST) {
+
+    redis.set("cache", "[", "EX", CACHE_KEEP_TIME_S)
+
+    let remainder = numCollections
+    let offset = 0
+    let toCache = []
+
+    while (remainder > 0) {
+      let offsetEnd = offset + Math.min(remainder, MAX_COLLECTIONS_PER_CACHE_REQUEST)
+      toCache = JSON.stringify(collections.slice(offset, offsetEnd)).slice(1,-1)
+
+      toCache = offset == 0 ? toCache : `,${toCache}`
+
+      remainder -= MAX_COLLECTIONS_PER_CACHE_REQUEST
+      offset += MAX_COLLECTIONS_PER_CACHE_REQUEST
+    }
+
+    redis.append("cache", "]")
+  }
+}
+
+const genReturnObj = (collections) => {
   let returnObj = {
     allCollections: addAdditionalAttributes(collections),
     newestCollections: newestCollections(collections)
@@ -170,5 +154,33 @@ module.exports = async (req, res) => {
     })
   })
 
-  return(returnObj)
+  return returnObj
+}
+
+export default async function getOpenSea() {
+  let cache = JSON.parse(await redis.get("cache"))
+  let result = {}
+  let start = Date.now();
+
+  // for now, only use cache on development so that I don't have to wait forever for site to load
+  // cache = null
+  if (cache && process.env.NODE_ENV == 'development') {
+     console.log("loading from cache")
+
+     result.data = cache
+     result.latency = Date.now() - start;
+     result.type = "redis"
+  } else {
+    console.log("loading from api")
+
+    let rawCollections = await loadFromOpenSeaAPI()
+
+    refreshCache(rawCollections)
+
+    result.data = rawCollections
+    result.latency = Date.now() - start;
+    result.type = "api"
+  }
+
+  return (genReturnObj(result.data))
 }
