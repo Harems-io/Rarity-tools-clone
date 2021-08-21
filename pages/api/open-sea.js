@@ -83,10 +83,8 @@ module.exports = async (req, res) => {
   let result = {}
   let start = Date.now();
 
-  // temporarily just set cache to null to make sure it doesn't load from here
-  cache = null
-
-  if (cache) {
+  // for now, only use cache on development so that I don't have to wait forever for site to load
+  if (cache && process.env.NODE_ENV == 'development') {
      console.log("loading from cache")
      result.data = cache
      result.latency = Date.now() - start;
@@ -173,5 +171,4 @@ module.exports = async (req, res) => {
   })
 
   return(returnObj)
-  // res.status(200).json(returnObj)
 }
