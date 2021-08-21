@@ -8,7 +8,7 @@ import Head from 'next/head'
 import absoluteUrl from "next-absolute-url"
 
 // api
-import openSea from './api/open-sea';
+import getOpenSea from '../get-open-sea';
 
 // components
 import AllCollectionsTable from "../components/all-collections-table"
@@ -30,7 +30,7 @@ export async function getStaticProps(context) {
   // const apiURL = `http://localhost:3000/api/open-sea`
 
 //  const data = await fetcher(apiURL)
-  const data = await openSea()
+  const data = await getOpenSea()
   // data["newData"] = await fetcher(`${origin}/api/openSea0`)
   return { props: data}
 }

@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import Redis from "ioredis"
 
-import { round2Dec } from "../../util/round"
-import { sortByPath } from "../../util/sort"
+import { round2Dec } from "./util/round"
+import { sortByPath } from "./util/sort"
 
 const CACHE_KEEP_TIME_S = 43200
 const API_REQUEST_LIMIT_MS = 750
