@@ -65,7 +65,7 @@ const sleep = ms => {
 
 const redis = new Redis(process.env.REDIS_URL)
 
-function getFromOpenSea(url, waitIndex) {
+const getFromOpenSea = (url, waitIndex) => {
   const options = { method: "GET" }
 
   return new Promise((resolve, reject) => {
