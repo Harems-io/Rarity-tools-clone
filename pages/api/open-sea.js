@@ -9,6 +9,9 @@ const API_REQUEST_LIMIT_MS = 750
 const TOTAL_REQUESTS = 200
 const MAX_COLLECTIONS_PER_CACHE_REQUEST = 500
 const MAX_COLLECTIONS_PER_REQUEST = 250
+
+const NEWEST_COLLECTIONS_TOTAL_NUM = 12
+
 const TOP10_LISTS = {
   top10by7DayVol: {stat: "seven_day_volume", unit: "ETH"},
   top10byTotalVol: {stat: "total_volume", unit: "ETH"},
@@ -42,6 +45,12 @@ const top10ByStat = (collectionArray, stat) => {
   return sortByPath(collectionsSubset, ["stats", stat]).slice(0, 10)
 }
 
+const newestCollections = (collectionArray) => {
+  const collectionsSubset = JSON.parse(JSON.stringify(collectionArray))
+
+  return sortByPath(collectionArray, ["created_date"]).slice(0, NEWEST_COLLECTIONS_TOTAL_NUM)
+}
+
 const addAdditionalAttributes = (collectionsArray) => {
   return collectionsArray.map((c) => {
     c.stats["owner_pct"] = c.stats.num_owners / c.stats.total_supply
@@ -73,6 +82,9 @@ module.exports = async (req, res) => {
   let rawCollections = [];
   let result = {}
   let start = Date.now();
+
+  // temporarily just set cache to null to make sure it doesn't load from here
+  cache = null
 
   if (cache) {
      console.log("loading from cache")
@@ -124,6 +136,7 @@ module.exports = async (req, res) => {
     } else if (numCollections > MAX_COLLECTIONS_PER_CACHE_REQUEST) {
 
       redis.set("cache", "[", "EX", CACHE_KEEP_TIME_S)
+
       let remainder = numCollections
       let offset = 0
       let toCache = []
@@ -143,7 +156,8 @@ module.exports = async (req, res) => {
   const collections = result.data
 
   let returnObj = {
-    allCollections: addAdditionalAttributes(collections)
+    allCollections: addAdditionalAttributes(collections),
+    newestCollections: newestCollections(collections)
   }
 
   Object.keys(TOP10_LISTS).forEach((k) => {
@@ -158,5 +172,6 @@ module.exports = async (req, res) => {
     })
   })
 
-  res.status(200).json(returnObj)
+  return(returnObj)
+  // res.status(200).json(returnObj)
 }

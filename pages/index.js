@@ -7,6 +7,9 @@ import Head from 'next/head'
 // external
 import absoluteUrl from "next-absolute-url"
 
+// api
+import openSea from './api/open-sea';
+
 // components
 import AllCollectionsTable from "../components/all-collections-table"
 import CollectionGroup from "../components/collection-group"
@@ -16,17 +19,18 @@ import TopAd from "../components/top-ad"
 import TopListCard from "../components/top-list-card"
 import SearchBar from "../components/search-bar"
 
-const COLLECTIONS_PER_ROW = 4
-const COLLECTION_TOTAL_NUM = 12
-
+const NEWEST_COLLECTIONS_PER_ROW = 4
+// const NEWEST_COLLECTIONS_TOTAL_NUM = 12
 // import '../styles/index.module.scss';
 
 const fetcher = url => fetch(url).then(res => res.json());
 
-export async function getServerSideProps(context) {
-  const { origin } = absoluteUrl(context.req)
-  const apiURL = `${origin}/api/open-sea`
-  const data = await fetcher(apiURL)
+export async function getStaticProps(context) {
+  // const { origin } = absoluteUrl(context.req)
+  // const apiURL = `http://localhost:3000/api/open-sea`
+
+//  const data = await fetcher(apiURL)
+  const data = await openSea()
   // data["newData"] = await fetcher(`${origin}/api/openSea0`)
   return { props: data}
 }
@@ -57,8 +61,8 @@ export default function Home(props) {
             {/* group of all collection cards */}
     				<div className="flex flex-row flex-wrap justify-around">
               {
-                [...Array(COLLECTION_TOTAL_NUM / COLLECTIONS_PER_ROW).keys()].map((i) => {
-                  const dataForGroup = props.allCollections.slice(i * COLLECTIONS_PER_ROW, (i+1) * COLLECTIONS_PER_ROW);
+                [...Array(props.newestCollections.length / NEWEST_COLLECTIONS_PER_ROW).keys()].map((i) => {
+                  const dataForGroup = props.newestCollections.slice(i * NEWEST_COLLECTIONS_PER_ROW, (i+1) * NEWEST_COLLECTIONS_PER_ROW);
                   const insertAd = (i % 2) == 0;
 
                   if (dataForGroup.length) {
