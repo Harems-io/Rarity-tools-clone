@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: cURL request
         # Hit the webhook endpoint to rebuild  from the "main" branch
-        run: curl -X POST -d {} https://api.netlify.com/build_hooks/6120b36db800f699bd219615
+        run: https://api.netlify.com/build_hooks/612266c1127d4a9371b30baa
       - name: cURL request
         # Hit the webhook endpoint to rebuild  from the "periodic-rebuilding-of-site-thru-github-actions" branch
         run: curl -X POST -d {} https://api.netlify.com/build_hooks/612190d216ea339ad913aa5e
