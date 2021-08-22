@@ -4,7 +4,7 @@ export default function CollectionCard ({ data }) {
   return(
     <div className="mb-4 ml-4 overflow-hidden border border-gray-300 rounded-lg shadow-md bgCard dark:border-gray-800">
       <div className="w-72">
-        <a href="/svinsfarm" className="">
+        <a href={`/${data.slug}`} className="">
           <div className="relative w-full overflow-hidden" style={{height: "220px"}}>
 
             {/* unique featured banner for first element */}
